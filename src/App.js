@@ -118,6 +118,7 @@ export default function TickPlacementBars() {
   const [tickLabelPlacement, setTickLabelPlacement] = React.useState("middle");
 
   return (
+    
     <div style={{ width: "50%" }}>
       <CurrentGraph />
       <BarChart
