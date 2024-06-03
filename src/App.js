@@ -7,9 +7,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
-import "./chart.css";
 import CurrentGraph from "./Components/Graph/CurrentGraph";
-
+import Flactuation from "./Components/Graph/Flactuation";
+import "../src/Components/Graph/style.css";
 function TickParamsSelector({
   tickPlacement,
   tickLabelPlacement,
@@ -118,24 +118,9 @@ export default function TickPlacementBars() {
   const [tickLabelPlacement, setTickLabelPlacement] = React.useState("middle");
 
   return (
-    
-    <div style={{ width: "50%" }}>
+    <div className="dashboard-wrapper">
       <CurrentGraph />
-      <BarChart
-        dataset={dataset}
-        borderRadius={4}
-        grid={{ vertical: false }}
-        leftAxis={null}
-        xAxis={[
-          {
-            scaleType: "band",
-            dataKey: "currency",
-            //underline value here ........s
-            tickPlacement,
-          },
-        ]}
-        {...chartSetting}
-      />
+      <Flactuation />
     </div>
   );
 }
