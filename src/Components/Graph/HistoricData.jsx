@@ -22,6 +22,25 @@ const xLabels = [
   "M",
   "N",
 ];
+
+const data = [
+  {
+    xLabels: 2014,
+    uData: 7000,
+  },
+  {
+    xLabels: 2015,
+    uData: 2000,
+  },
+  {
+    xLabels: 2017,
+    uData: 200,
+  },
+  {
+    xLabels: 2018,
+    uData: 8000,
+  },
+];
 const color = "#f5f5f5";
 export default function HistoricData() {
   return (
@@ -43,8 +62,6 @@ export default function HistoricData() {
           bottomAxis={{ disableTicks: true, disableLine: true }}
           // ...
 
-
-          
           height={242}
           series={[
             {
