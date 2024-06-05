@@ -107,11 +107,11 @@
 .addIcon {
   padding: 20px;
   cursor: pointer;
+  z-index: 5;
 }
 .sub-section {
   display: flex;
   justify-content: space-between;
-  margin-top: 12px;
   margin-bottom: 20px;
   align-items: center;
 }
