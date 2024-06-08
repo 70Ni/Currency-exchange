@@ -90,14 +90,14 @@ function Flactuation() {
               <div className="indicator"></div>
               <div className="para">Start Rate</div>
             </div>
-            <div className="fluc-rate subHeader">0.3542</div>
+            <div className="fluc-rate sub-Header">0.3542</div>
           </div>
           <div className="fluc-data-line">
             <div className="fluc-value">
               <div className="indicator"></div>
               <div className="para">Start Rate</div>
             </div>
-            <div className="fluc-rate subHeader">0.3542</div>
+            <div className="fluc-rate sub-Header">0.3542</div>
           </div>
           <div className="fluc-final-value">
             <div className="fluc-data-line">
