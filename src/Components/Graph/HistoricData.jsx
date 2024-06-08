@@ -47,8 +47,8 @@ export default function HistoricData() {
     <div className="chart-align">
       <div className="chart-block">
         <div className="sub-section">
-          <div className="subHeader">United State Dollar</div>
-          <div className="subHeader">$</div>
+          <div className="sub-Header">United State Dollar</div>
+          <div className="sub-Header">$</div>
         </div>
         <LineChart
           margin={{

@@ -10,9 +10,16 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import add from "../../Image/Add.svg";
 import "./style.css";
 import HistoricData from "./HistoricData";
+
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+
+import { Calendar, DateRange, DateRangePicker } from "react-date-range";
 import Menu from "../Menu/Menu";
 
 import { useComponentVisible } from "../../Functions/useComponentVisible";
+// import { DatePicker, DateRangeInput } from "rsuite";
+// import { DateRangePicker } from "rsuite";
 // export function useComponentVisible(initialIsVisible) {
 //   const [isComponentVisible, setIsComponentVisible] =
 //     useState(initialIsVisible);
@@ -28,6 +35,7 @@ import { useComponentVisible } from "../../Functions/useComponentVisible";
 //     if (ref.current && !ref.current.contains(event.target)) {
 //       setIsComponentVisible(false);
 //     }
+//     console.log(isComponentVisible)
 //   };
 
 //   useEffect(() => {
@@ -41,7 +49,6 @@ import { useComponentVisible } from "../../Functions/useComponentVisible";
 
 //   return { ref, isComponentVisible, setIsComponentVisible };
 // }
-
 const dataset = [
   {
     value: 80,
@@ -83,7 +90,8 @@ function CurrentGraph() {
     return setNewCurrency(currency);
   };
 
-  const [color, setcolor] = useState("#d9d9d9");
+  // const [color, setcolor] = useState("#d9d9d9");
+  const colour = "#d9d9d9";
   const valueFormatter = (value) => `${value}`;
 
   const chartSetting = {
@@ -92,7 +100,7 @@ function CurrentGraph() {
         label: `rate in ${dataset.currency}`,
       },
     ],
-    series: [{ dataKey: "value", valueFormatter, color }],
+    series: [{ dataKey: "value", valueFormatter, colour }],
     height: 242,
     sx: {
       [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
@@ -101,19 +109,7 @@ function CurrentGraph() {
     },
   };
 
-  // const handleClickOutside = (event) => {
-  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-  //     setvis(true);
-  //     console.log("Hello there");
-  //   }
-  // };
 
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", handleClickOutside());
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside());
-  //   };
-  // }, []);
 
   ////////////////////////////////////////////
   const NewGraph = {
@@ -133,13 +129,21 @@ function CurrentGraph() {
     return NewGraphUpdate();
   }, [NewCurrency]);
 
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+  console.log(state[0].startDate.getMonth() + 1);
+
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
   return (
     <div className="current-wrapper">
       <div className="Header-section">
-   
         <div className="cur-left">
           <div className="Header">Currency Graph</div>
           <div className="para">
@@ -147,17 +151,36 @@ function CurrentGraph() {
           </div>
         </div>
         <div className="cur-right">
-          <div className="Button para">Select Range</div>
+          <div className="Button para">{/* <DateRange /> */}</div>
         </div>
       </div>
       <div className="curl-bottom">
         <div className="graph-wrapper">
           <div className="chart-align">
             <div className="sub-section">
-              <div className="subHeader">Currencies</div>
+              <div className="sub-Header">Currencies</div>
               <div className="tag">Base of 1 USD</div>
             </div>
             <div className="bar-chart-act">
+              {/* <DatePicker /> */}
+              {/* <DateRange
+                editableDateInputs={true}
+                onChange={(item) => setState([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={state}
+                // preview={{
+                //   startDate: new Date("2023-05-24"),
+                //   endDate: "2023-09-24",
+                // }}
+                rangeColors="#d5df3b"
+                // inputRanges={{
+                //   label: "days up to today",
+                //   range: () => ({
+                //     startDate: new Date("2023-05-24"),
+                //     endDate: new Date("2023-04-24"),
+                //   }),
+                // }}
+              /> */}
               <BarChart
                 dataset={dataset}
                 borderRadius={4}
@@ -200,6 +223,7 @@ function CurrentGraph() {
             </div>
           </div>
           <HistoricData />
+          {/* <DateRange /> */}
         </div>
       </div>
     </div>
@@ -207,3 +231,12 @@ function CurrentGraph() {
 }
 
 export default CurrentGraph;
+
+//collect a month json file
+//filter data to graph
+
+//request data based on date range - fluctuation
+//request data based on date
+
+//color theme
+//dark mode
