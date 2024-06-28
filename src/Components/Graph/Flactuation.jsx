@@ -4,7 +4,6 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import add from "../../Image/Add.svg";
 import "./style.css";
-import HistoricData from "./HistoricData";
 
 const dataset = [
   {
