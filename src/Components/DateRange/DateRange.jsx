@@ -3,7 +3,7 @@ import { DateRangePicker } from "rsuite";
 import "./date.css";
 
 function DateRange() {
-  return null;
+  return "Heleo";
   // <div direction="column" alignItems="flex-start" spacing={6}>
   //   <DateRangePicker size="sm" placeholder="Small" />
   // </div>
