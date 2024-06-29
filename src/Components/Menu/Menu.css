@@ -29,11 +29,13 @@
   position: absolute;
   background-color: white;
   padding: 14px;
-  box-shadow: 5px 10px 18px #e3e3e3;
+    backdrop-filter: blur(80px);
+
+  box-shadow: 5px 10px 18px #36363638;
   height: fit-content;
   border-radius: 12px;
   top: -130px;
-  left: 20px;
+  left: -90px;
   z-index: 2;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
