@@ -9,7 +9,7 @@ import HistoricData from "./HistoricData";
 
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-
+import CurrencyBar from "./CurrencyBar";
 import Menu from "../Menu/Menu";
 
 import { useComponentVisible } from "../../Functions/useComponentVisible";
@@ -50,14 +50,7 @@ function CurrentGraph() {
     },
   };
 
-  // const [state, setState] = useState([
-  //   {
-  //     startDate: new Date(),
-  //     endDate: null,
-  //     key: "selection",
-  //   },
-  // ]);
-  // console.log(state[0].startDate.getMonth() + 1);
+ 
 
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
@@ -83,29 +76,7 @@ function CurrentGraph() {
               <div className="tag">Base of 1 USD</div>
             </div>
             <div className="bar-chart-act">
-              <BarChart
-                dataset={obj}
-                borderRadius={4}
-                grid={{ vertical: false }}
-                leftAxis={null}
-                bottomAxis={{ disableTicks: true, disableLine: true }}
-                // ...
-                height={242}
-                // width={300}
-                margin={{
-                  left: 0,
-                  right: 0,
-                  top: 20,
-                  bottom: 20,
-                }}
-                xAxis={[
-                  {
-                    scaleType: "band",
-                    dataKey: "currency",
-                  },
-                ]}
-                {...chartSetting}
-              />
+              <CurrencyBar obj={obj} chartSetting={chartSetting} />
               <div className="menu-section">
                 <img
                   src={add}
