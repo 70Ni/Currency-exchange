@@ -5,7 +5,7 @@ function DateSection() {
     <div className="date-range-wrapper">
       <div className="current-date">30 May, 4:53 am UTC</div>
       <div className="status-range-selector">
-        <div className="st-date-buttons" style={{ marginRight: 20 }}>
+        <div className="st-date-buttons margin-right">
           from
           <div className="tag">12-12-24</div>
         </div>
