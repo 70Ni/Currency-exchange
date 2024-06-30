@@ -16,39 +16,25 @@ import Menu from "../Menu/Menu";
 import { useComponentVisible } from "../../Functions/useComponentVisible";
 // import obj, { fire } from "../../dataFilter";
 
-const currencyList = ["United State Dollar", "USD", "GPB", "KWD", "ETH"];
-// const dataset = null;
+// const currencyList = ["United State Dollar", "USD", "GPB", "KWD", "ETH"];
 function CurrentGraph() {
-  const [dataset, setDataset] = useState(null);
-
-  let cur;
-
   const [state, setState] = useState();
   const linkFetch =
     "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-03-06/v1/currencies/eur.json";
-  // "https://jsonplaceholder.typicode.com/todos/1";
-  const getData = async () => {
-    // await fetch(linkFetch)
-    const response = await fetch(linkFetch).then((resp) => {
-      resp.json();
-    });
-    return response;
-  };
-  let curr = ["usd", "eur", "gbp"];
+
+  let currencyList = ["usd", "eur", "gbp"];
   let dap;
-  let i = 0;
   let obj = [];
   let indexofCurrency;
   useEffect(() => {
     fetch(linkFetch)
       .then((resp) => resp.json())
       .then((val) => {
-        for (let i = 0; i <= curr.length; i++) {
-          indexofCurrency = Object.keys(val?.eur).indexOf(curr[i]);
+        for (let i = 0; i <= currencyList.length; i++) {
+          indexofCurrency = Object.keys(val?.eur).indexOf(currencyList[i]);
           const value = Object.entries(val?.eur);
           dap = value[indexofCurrency];
           console.log(dap);
-
           let name = dap[0];
           let valu = dap[1];
           obj.push({ value: valu, currency: name });
@@ -58,72 +44,7 @@ function CurrentGraph() {
       .catch((error) => {
         console.log(error);
       });
-    ////////////////////////////////
-    // getData().then((data) => {
-    //   setstate({ data: data });
-    //   console.log(state, "fomr state");
-    // });
-    ///////////////////////////
-    // fetch(linkFetch)
-    //   .then((response) => response.json())
-    //   .then((users) => {
-    //     setState({ robots: users });
-    //   });
   }, []);
-  console.log(state,"state");
-
-  // useEffect(() => {
-  //   // Function to fetch data
-  //   const fetchData = async () => {
-  //     try {
-  //       // Fetch data from the API
-  //       const response = await fetch(
-  //         "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-03-06/v1/currencies/eur.json"
-  //       )
-  //         .then(async (fetch) => await (cur = fetch.json()))
-  //         .then(() => {
-  //           setDataset(cur);
-  //         });
-  //       // Check if request was successful
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch data");
-  //       }
-  //       // let data = await response.json();
-  //       // let parse = await JSON.stringify(data);
-  //       // let par = await JSON.parse(data);
-  //       // Parse JSON response
-  //       // console.log(daa, "json");
-  //       // const jsonstring = JSON.stringify(jsonData);
-  //       // const jsonParse = JSON.parse(jsonstring);
-  //       // Update state with fetched data
-  //       // setDataset(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   // Call fetchData function when component mounts
-  //   fetchData();
-  //   // Clean up function (optional)
-  //   // return () => {
-  //   //   // Any cleanup code goes here
-  //   //   // 2.uncomment this <==================================
-  //   //   // setweatherData(details);
-  //   // };
-  // }, []);
-
-  ///////////////////////////////////
-  // console.log(dataset, "state");
-  ///////////////////////////
-  // console.log(dataset.eur, "Date found");
-  // console.log(Object.entries(dataset.eur));
-  /////////////////////////
-
-  // console.log(file);
-  // if (dataset) {
-  //   let c = fire(dataset);
-  //   console.log(c);
-  // }
 
   const [NewCurrency, setNewCurrency] = useState("");
   console.log(NewCurrency);
@@ -173,7 +94,7 @@ function CurrentGraph() {
               <div className="tag">Base of 1 USD</div>
             </div>
             <div className="bar-chart-act">
-              {/* <CurrencyBar obj={obj} chartSetting={chartSetting} /> */}
+              <CurrencyBar obj={state} chartSetting={chartSetting} />
               <div className="menu-section">
                 <img
                   src={add}
