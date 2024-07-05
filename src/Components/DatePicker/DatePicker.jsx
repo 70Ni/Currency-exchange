@@ -28,9 +28,7 @@ function DatePicker() {
           {/* <button className="popupbuttons" buttonText={"Apply"}>
             Cancel
           </button> */}
-          <button className="popupbuttons" buttonText={"Apply"}>
-            Apply
-          </button>
+          <button className="popupbuttons">Apply</button>
         </div>
       </div>
     </div>
