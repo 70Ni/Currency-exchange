@@ -25,16 +25,16 @@ let currencyList = [
   "azn",
 ];
 let dap = [];
-let obj = [];
+// let obj = [];
 let base = "eur";
 let indexofCurrency;
 let name;
 let valu;
 let date;
-let finalObje = [];
+let finalObje = {};
 let dataOb;
 let firstDate;
-
+let finalarray = [];
 const monthFetch = () => {
   let indexofCurrency;
   for (let index = 14; index <= 24; index++) {
@@ -51,7 +51,7 @@ const monthFetch = () => {
 
       const data = await response.json(); // Or response.text() for plain text
       dataOb = await Object.entries(data);
-
+      let obj = [];
       for (let i = 0; i < currencyList.length; i++) {
         indexofCurrency = await Object.keys(data[base]).indexOf(
           currencyList[i]
@@ -63,22 +63,25 @@ const monthFetch = () => {
           valu = await dap[1];
           firstDate = `2024-03-${index}`;
           // date = await dataOb[0][1];
-          return obj.push({ value: valu, currency: name.toUpperCase() });
+          obj.push({ value: valu, currency: name.toUpperCase() });
         } //if loop for dap
       } //for loooooooooooop currency
+      finalObje[firstDate] = obj;
+
       // console.log((finalObje[firstDate] = obj));
       // console.log((obj[firstDate] = obj));
-      finalObje[firstDate] = obj;
       // console.log("HOl;k");
-      console.log(finalObje);
       // console.log(index, "index", currencyList.length, "cuurency");
     }
-    fetchData()
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Error:", error));
+
+    fetchData();
+    // fetchData()
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.error("Error:", error));
   } ///for loop of date
 };
 
+console.log(finalObje);
 // finalObje[firstDate].push(obj);
 
 // if (firstDate === dataOb[0][1]) {
