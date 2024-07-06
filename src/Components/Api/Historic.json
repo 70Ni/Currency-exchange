@@ -1,0 +1,502 @@
+[
+  {
+    "2024-03-07": [
+      {
+        "value": 1.08498675,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.33379532,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85459559,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47535651,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.95966265,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.6706533,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.78607085,
+        "currency": "NZD"
+      },
+      {
+        "value": 3.98461383,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45458815,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.95966265,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45721895,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.37979216,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-08": [
+      {
+        "value": 1.09500557,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.33640061,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85462428,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47330237,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.96068787,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.65417238,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77370204,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.02140795,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45476347,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.96068787,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45953364,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.40432743,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-09": [
+      {
+        "value": 1.09382972,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.33586359,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85096165,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47452739,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.9600684,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.65096583,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77144395,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.01708965,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45400984,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.9600684,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45819518,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.44752631,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-10": [
+      {
+        "value": 1.09404819,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.33576276,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85137832,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47673392,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.96043574,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.64950518,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77174474,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.01789197,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45643732,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.96043574,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45729185,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.4489562,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-11": [
+      {
+        "value": 1.09404819,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.33576276,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85137832,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47673392,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.96043574,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.64950518,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77174474,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.01789197,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45643732,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.96043574,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45729185,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.4489562,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-12": [
+      {
+        "value": 1.09289326,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.3356754,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85265623,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47322747,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.95892962,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.65196445,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77153555,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.01365051,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45600097,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.95892962,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.4541772,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.44096645,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-13": [
+      {
+        "value": 1.09266049,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.3355849,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85394921,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47431238,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.95880807,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.6542501,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77737984,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.01279564,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45661853,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.95880807,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45546973,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.43050768,
+        "currency": "BRL"
+      },
+      {
+        "value": 1.09266049,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.3355849,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.85394921,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47431238,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.95880807,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.6542501,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77737984,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.01279564,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45661853,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.95880807,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45546973,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.43050768,
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "2024-03-14": [
+      {
+        "value": 1.09506997,
+        "currency": "USD"
+      },
+      {
+        "value": 1,
+        "currency": "EUR"
+      },
+      {
+        "value": 0.33637908,
+        "currency": "KWD"
+      },
+      {
+        "value": 0.8554017,
+        "currency": "GBP"
+      },
+      {
+        "value": 1.47460046,
+        "currency": "CAD"
+      },
+      {
+        "value": 0.96192813,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.65215555,
+        "currency": "AUD"
+      },
+      {
+        "value": 1.77479367,
+        "currency": "NZD"
+      },
+      {
+        "value": 4.02164446,
+        "currency": "AED"
+      },
+      {
+        "value": 7.45638441,
+        "currency": "DKK"
+      },
+      {
+        "value": 0.96192813,
+        "currency": "CHF"
+      },
+      {
+        "value": 1.45849472,
+        "currency": "SGD"
+      },
+      {
+        "value": 5.4432151,
+        "currency": "BRL"
+      }
+    ]
+  }
+]
