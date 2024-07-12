@@ -1,32 +1,6 @@
 import React from "react";
 import { BarChart } from "@mui/x-charts";
-
-let data = [
-  {
-    value: 1.08498675,
-    currency: "usd",
-  },
-  {
-    value: 1,
-    currency: "eur",
-  },
-  {
-    value: 0.85459559,
-    currency: "gbp",
-  },
-  {
-    value: 1.08498675,
-    currency: "usd",
-  },
-  {
-    value: 1,
-    currency: "eur",
-  },
-  {
-    value: 0.85459559,
-    currency: "gbp",
-  },
-];
+import { useSelector } from "react-redux";
 
 const onItemClick = (
   event, // The mouse event.
@@ -35,10 +9,26 @@ const onItemClick = (
   return console.log(params);
 };
 
-function CurrencyBar({ obj, chartSetting }) {
+const chartSetting = {
+  yAxis: [
+    {
+      label: `rate in ${dataset?.currency}`,
+    },
+  ],
+  series: [{ dataKey: "value", valueFormatter, colour }],
+  height: 242,
+  sx: {
+    [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
+      transform: "translateX(-10px)",
+    },
+  },
+};
+let dataset = useSelector((state) => state.fetchdata.data);
+
+function CurrencyBar() {
   return (
     <BarChart
-      dataset={obj}
+      dataset={dataset}
       borderRadius={4}
       grid={{ vertical: false }}
       leftAxis={null}
