@@ -32,7 +32,7 @@ let currencyList = [
 ];
 const base = "eur";
 export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
-  console.log(online, base);
+  console.log(online, base, "from action params");
   dispatch({ type: "FETCH_DATA_REQUEST" });
   let indexofCurrency;
   let name;
@@ -68,9 +68,6 @@ export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
       dispatch({ type: "HISTORIC_DATA", payload: data.country });
     } else {
       // const data = await { online, eur };
-      let data;
-      console.log("yes in else");
-      console.log(eur.eur);
 
       const work = () => {
         for (let i = 0; i <= currencyList.length; i++) {
@@ -114,19 +111,21 @@ export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
 
         let mo;
         let indexofCurrency;
-        for (let i = 2; i <= 31; i++) {
+        console.log(defaultCurrency,"from the loop");
+        for (let i = 6; i <= 31; i++) {
           let typeOfCurrency;
           // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
-          mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
+          mo = histry[`2024-03-${i.toString().padStart(2, "0")}`];
           let arr = [];
+          // check the default currency chagnes
           for (let j = 0; j < 14; j++) {
-            let valueToFind = "KWD";
+            let valueToFind = defaultCurrency;
             // console.log(mo[j].currency == valueToFind);
             arr.push(mo[j].currency == valueToFind);
             indexofCurrency = arr.indexOf(true);
           }
           // console.log(mo[3].value,"CAD");
-          console.log(indexofCurrency);
+          // console.log(indexofCurrency);
           ud.push(mo[indexofCurrency].value.toFixed(2));
           xd.push(i);
 
@@ -137,6 +136,7 @@ export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
         return {
           filter: { xd, ud },
           data: histry,
+          currency: defaultCurrency,
         };
       };
       dispatch({ type: "FETCH_DATA_SUCCESS", payload: work() });
@@ -214,7 +214,6 @@ export const fluctuationData =
 
 export const baseCurrecny = (defaultCurrency) => async (dispatch) => {
   try {
-    console.log(defaultCurrency);
     dispatch({ type: "BASE_CURRENCY", payload: defaultCurrency });
   } catch (error) {
     console.log(error);
