@@ -1,3 +1,4 @@
+import { defaultClassPrefix } from "rsuite/esm/internals/utils";
 import eur from "../Components/Api/eur.json";
 import histry from "../Components/Api/Histo.json";
 import fluctuationVector from "../Functions/Fluctuation";
@@ -30,7 +31,8 @@ let currencyList = [
   "brn",
 ];
 const base = "eur";
-export const fetchitemData = (online) => async (dispatch) => {
+export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
+  console.log(online, base);
   dispatch({ type: "FETCH_DATA_REQUEST" });
   let indexofCurrency;
   let name;
@@ -38,12 +40,11 @@ export const fetchitemData = (online) => async (dispatch) => {
   let dap = [];
   let obj = [];
   try {
-    if (true) {
+    if (online) {
       const data = await Promise.all(
         urls.map((url) => fetch(url).then((res) => res.json()))
       ).then(async (respo) => {
         for (let i = 0; i <= currencyList.length; i++) {
-          console.log(indexofCurrency);
           indexofCurrency = await Object.keys(respo[0][base]).indexOf(
             currencyList[i]
           );
@@ -57,8 +58,8 @@ export const fetchitemData = (online) => async (dispatch) => {
           }
         }
         return {
-          data: respo[0],
           country: respo[1],
+          data: respo[0],
           graphCurrency: obj,
           base: base,
         };
@@ -67,8 +68,79 @@ export const fetchitemData = (online) => async (dispatch) => {
       dispatch({ type: "HISTORIC_DATA", payload: data.country });
     } else {
       // const data = await { online, eur };
-      // dispatch({ type: "FETCH_DATA_SUCCESS", payload: obj });
-      // dispatch({ type: "HISTORIC_DATA", payload: histry });
+      let data;
+      console.log("yes in else");
+      console.log(eur.eur);
+
+      const work = () => {
+        for (let i = 0; i <= currencyList.length; i++) {
+          indexofCurrency = Object.keys(eur.eur).indexOf(currencyList[i]);
+          // console.log(currencyList.length, "MEMEBERS");
+          let value = Object.entries(eur.eur);
+          dap = value[indexofCurrency];
+          if (dap) {
+            name = dap[0];
+            valu = dap[1];
+            obj.push({ value: valu, currency: name.toUpperCase() });
+          }
+        }
+        return obj;
+      };
+      const currencyTimeLine = () => {
+        let ud = [];
+        let xd = [];
+
+        // for (let i = 3; i <= 31; i++) {
+        //   // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
+        //   let mo = histry[`2024-03-${i.toString().padStart(2, "0")}`];
+        //   // console.log(mo);
+        //   // console.log(mo[3].value,"CAD");
+        //   let arr = [];
+
+        //   for (let j = 0; j < 14; j++) {
+        //     let valueToFind = defaultCurrency;
+        //     // console.log(mo[j].currency == valueToFind);
+        //     arr.push(mo[j].currency == valueToFind);
+        //     indexofCurrency = arr.indexOf(true);
+        //   }
+        //   console.log(indexofCurrency);
+        //   ud.push(mo[indexofCurrency].value.toFixed(2));
+        //   xd.push(i);
+
+        //   // console.log(data[`2024-03-02`][i].value, "data");
+        //   // let month = data[`2024-03-${i.toString().padStart(2, "0")}`][1];
+        //   // let month = data[`2024-03-05`][i].currency;
+        // }
+
+        let mo;
+        let indexofCurrency;
+        for (let i = 2; i <= 31; i++) {
+          let typeOfCurrency;
+          // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
+          mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
+          let arr = [];
+          for (let j = 0; j < 14; j++) {
+            let valueToFind = "KWD";
+            // console.log(mo[j].currency == valueToFind);
+            arr.push(mo[j].currency == valueToFind);
+            indexofCurrency = arr.indexOf(true);
+          }
+          // console.log(mo[3].value,"CAD");
+          console.log(indexofCurrency);
+          ud.push(mo[indexofCurrency].value.toFixed(2));
+          xd.push(i);
+
+          // console.log(data[`2024-03-02`][i].value, "data");
+          // let month = data[`2024-03-${i.toString().padStart(2, "0")}`][1];
+          // let month = data[`2024-03-05`][i].currency;
+        }
+        return {
+          filter: { xd, ud },
+          data: histry,
+        };
+      };
+      dispatch({ type: "FETCH_DATA_SUCCESS", payload: work() });
+      dispatch({ type: "HISTORIC_DATA", payload: currencyTimeLine() });
     }
   } catch (error) {
     console.log(error);
@@ -140,9 +212,13 @@ export const fluctuationData =
     }
   };
 
-export const baseCurrecny = () => async (dispatch) => {
+export const baseCurrecny = (defaultCurrency) => async (dispatch) => {
   try {
-  } catch (error) {}
+    console.log(defaultCurrency);
+    dispatch({ type: "BASE_CURRENCY", payload: defaultCurrency });
+  } catch (error) {
+    console.log(error);
+  }
 };
 // online to be global
 // Default currency
