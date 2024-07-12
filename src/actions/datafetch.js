@@ -13,23 +13,66 @@ let linkFetch = baseLink + "eur" + ".json";
 
 const urls = [linkFetch, countryLink];
 
+let currencyList = [
+  "usd",
+  "eur",
+  "kwd",
+  "gbp",
+  "cad",
+  "chf",
+  "aud",
+  "nzd",
+  "aed",
+  "dkk",
+  "chf",
+  "sgd",
+  "brl",
+  "brn",
+];
+const base = "eur";
 export const fetchitemData = (online) => async (dispatch) => {
+  dispatch({ type: "FETCH_DATA_REQUEST" });
+  let indexofCurrency;
+  let name;
+  let valu;
+  let dap = [];
+  let obj = [];
   try {
-    if (online) {
+    if (true) {
       const data = await Promise.all(
         urls.map((url) => fetch(url).then((res) => res.json()))
-      ).then(async (respo) => ({
-        data: respo[0],
-        country: respo[1],
-      }));
-      dispatch({ type: FETCH_DATA, payload: data.data });
-      dispatch({ type: "COUNTRY_DATA", payload: data.country });
+      ).then(async (respo) => {
+        for (let i = 0; i <= currencyList.length; i++) {
+          console.log(indexofCurrency);
+          indexofCurrency = await Object.keys(respo[0][base]).indexOf(
+            currencyList[i]
+          );
+          // console.log(currencyList.length, "MEMEBERS");
+          let value = await Object.entries(respo[0][base]);
+          dap = await value[indexofCurrency];
+          if (dap) {
+            name = await dap[0];
+            valu = await dap[1];
+            obj.push({ value: valu, currency: name.toUpperCase() });
+          }
+        }
+        return {
+          data: respo[0],
+          country: respo[1],
+          graphCurrency: obj,
+          base: base,
+        };
+      });
+      dispatch({ type: "FETCH_DATA_SUCCESS", payload: data });
+      dispatch({ type: "HISTORIC_DATA", payload: data.country });
     } else {
-      dispatch({ type: FETCH_DATA, payload: eur });
-      dispatch({ type: "HISTORIC_DATA", payload: histry });
+      // const data = await { online, eur };
+      // dispatch({ type: "FETCH_DATA_SUCCESS", payload: obj });
+      // dispatch({ type: "HISTORIC_DATA", payload: histry });
     }
   } catch (error) {
     console.log(error);
+    dispatch({ type: "FETCH_DATA_FAILURE", error: error.message });
   }
 };
 
@@ -68,7 +111,6 @@ export const fluctuationData =
           // console.log(secondDate["00"], "second");
           // console.log(firstDate.eur, "fist");
           let secondValue = secondDate.kwd;
-
           let rateChange = fluctuationVector(secondValue, firstvalue);
 
           return {
@@ -77,6 +119,7 @@ export const fluctuationData =
             rateChange: rateChange,
           };
         });
+
         dispatch({ type: "FLUCTUATION_DATA", payload: data });
       } else {
         let start = "2024-03-02";
@@ -97,5 +140,9 @@ export const fluctuationData =
     }
   };
 
+export const baseCurrecny = () => async (dispatch) => {
+  try {
+  } catch (error) {}
+};
 // online to be global
 // Default currency
