@@ -22,23 +22,25 @@ let currencyList = [
   "cad",
   "chf",
   "aud",
-  "nzd",
-  "aed",
-  "dkk",
-  "chf",
-  "sgd",
-  "brl",
-  "brn",
+  // "nzd",
+  // "aed",
+  // "dkk",
+  // "chf",
+  // "sgd",
+  // "brl",
+  // "brn",
 ];
 const base = "eur";
+let indexofCurrency;
+
 export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
-  console.log(online, base, "from action params");
   dispatch({ type: "FETCH_DATA_REQUEST" });
-  let indexofCurrency;
   let name;
   let valu;
   let dap = [];
   let obj = [];
+  let zen;
+  let currencyDetails;
   try {
     if (online) {
       const data = await Promise.all(
@@ -54,21 +56,31 @@ export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
           if (dap) {
             name = await dap[0];
             valu = await dap[1];
-            obj.push({ value: valu, currency: name.toUpperCase() });
+            obj.push({ value: valu, currency: name });
           }
         }
+        let parseCountry = Object.values(respo[1]);
+        let matchIndex = parseCountry.findIndex(
+          (x) => x.currency_code === defaultCurrency.toLowerCase()
+        );
+        currencyDetails = parseCountry[matchIndex];
+        zen = respo[1];
         return {
           country: respo[1],
           data: respo[0],
-          graphCurrency: obj,
+          obj,
+          currencyDetails,
           base: base,
+          online: true,
         };
       });
       dispatch({ type: "FETCH_DATA_SUCCESS", payload: data });
-      dispatch({ type: "HISTORIC_DATA", payload: data.country });
+      dispatch({
+        type: "HISTORIC_DATA",
+        payload: { zen, currencyDetails },
+      });
     } else {
-      // const data = await { online, eur };
-
+      const data = await { online, eur };
       const work = () => {
         for (let i = 0; i <= currencyList.length; i++) {
           indexofCurrency = Object.keys(eur.eur).indexOf(currencyList[i]);
@@ -78,57 +90,34 @@ export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
           if (dap) {
             name = dap[0];
             valu = dap[1];
-            obj.push({ value: valu, currency: name.toUpperCase() });
+            obj.push({ value: valu, currency: name });
           }
         }
-        return obj;
+        return { obj, online: false };
       };
       const currencyTimeLine = () => {
         let ud = [];
         let xd = [];
-
-        // for (let i = 3; i <= 31; i++) {
-        //   // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
-        //   let mo = histry[`2024-03-${i.toString().padStart(2, "0")}`];
-        //   // console.log(mo);
-        //   // console.log(mo[3].value,"CAD");
-        //   let arr = [];
-
-        //   for (let j = 0; j < 14; j++) {
-        //     let valueToFind = defaultCurrency;
-        //     // console.log(mo[j].currency == valueToFind);
-        //     arr.push(mo[j].currency == valueToFind);
-        //     indexofCurrency = arr.indexOf(true);
-        //   }
-        //   console.log(indexofCurrency);
-        //   ud.push(mo[indexofCurrency].value.toFixed(2));
-        //   xd.push(i);
-
-        //   // console.log(data[`2024-03-02`][i].value, "data");
-        //   // let month = data[`2024-03-${i.toString().padStart(2, "0")}`][1];
-        //   // let month = data[`2024-03-05`][i].currency;
-        // }
-
         let mo;
+        console.log(defaultCurrency, "from the loop");
         let indexofCurrency;
-        console.log(defaultCurrency,"from the loop");
         for (let i = 6; i <= 31; i++) {
           let typeOfCurrency;
           // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
           mo = histry[`2024-03-${i.toString().padStart(2, "0")}`];
           let arr = [];
           // check the default currency chagnes
+          console.log(defaultCurrency);
           for (let j = 0; j < 14; j++) {
             let valueToFind = defaultCurrency;
             // console.log(mo[j].currency == valueToFind);
-            arr.push(mo[j].currency == valueToFind);
+            arr.push(mo[j].currency == valueToFind.toUpperCase());
             indexofCurrency = arr.indexOf(true);
           }
           // console.log(mo[3].value,"CAD");
           // console.log(indexofCurrency);
-          ud.push(mo[indexofCurrency].value.toFixed(2));
+          ud.push(mo[indexofCurrency]?.value?.toFixed(2));
           xd.push(i);
-
           // console.log(data[`2024-03-02`][i].value, "data");
           // let month = data[`2024-03-${i.toString().padStart(2, "0")}`][1];
           // let month = data[`2024-03-05`][i].currency;
@@ -147,22 +136,48 @@ export const fetchitemData = (online, defaultCurrency) => async (dispatch) => {
     dispatch({ type: "FETCH_DATA_FAILURE", error: error.message });
   }
 };
+//////////////////////fluctuation ////////////
 
-const date = { startDate: "2024-03-06", endDate: "2024-03-07" };
-const fistLink =
-  "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" +
-  date.startDate +
-  "/v1/currencies/eur.json";
-
-const secondLink =
-  "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" +
-  date.endDate +
-  "/v1/currencies/eur.json";
 // ----------------->
-const dateUrls = [fistLink, secondLink];
 
 export const fluctuationData =
-  (online, startDate, EndDate) => async (dispatch) => {
+  (online, defaultCurrency, dates) => async (dispatch) => {
+    let d = new Date();
+    let startDate = d.toISOString().split("T")[0];
+
+    let yesterday = new Date();
+
+    yesterday.setTime(yesterday.getTime() - 86400000);
+
+    let endDate = yesterday.toISOString().split("T")[0];
+    let date;
+    console.log(date);
+    console.log(dates, "state");
+    if (online && dates) {
+      date = { startDate: dates.startDate, endDate: dates.endDate };
+      console.log(date);  
+      console.log("fetching from state '''''''''''''''''''");
+    } else if (online) {
+      date = await { startDate: startDate, endDate: endDate };
+      console.log("fetching from fun '''''''''''''''''''");
+
+    } else {
+      date = await { startDate: "2024-03-08", endDate: "2024-03-09" };
+      console.log("fetching from hardcore '''''''''''''''''''");
+
+    }
+
+    const fistLink =
+      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" +
+      date.startDate +
+      "/v1/currencies/eur.json";
+
+    const secondLink =
+      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" +
+      date.endDate +
+      "/v1/currencies/eur.json";
+    const dateUrls = [fistLink, secondLink];
+
     try {
       if (online) {
         const data = await Promise.all(
@@ -172,38 +187,68 @@ export const fluctuationData =
               .then((res) => res.eur)
           )
         ).then(async (eur) => {
+          let curr = defaultCurrency;
           // console.log(eur);
           let b = JSON.stringify(eur[0]);
           let firstDate = JSON.parse(b);
           // console.log(firstDate.eur, "fist");
-          let firstvalue = firstDate.kwd;
+          let starRate = await firstDate?.[curr];
 
           let c = JSON.stringify(eur[1]);
           let secondDate = JSON.parse(c);
           // console.log(secondDate["00"], "second");
           // console.log(firstDate.eur, "fist");
-          let secondValue = secondDate.kwd;
-          let rateChange = fluctuationVector(secondValue, firstvalue);
-
+          let endRate = await secondDate?.[curr];
+          let rateChange = fluctuationVector(endRate, starRate);
           return {
-            starRate: firstvalue,
-            endRate: secondValue,
-            rateChange: rateChange,
+            graphvalues: [
+              {
+                value: starRate,
+                rate: "Start",
+              },
+              {
+                value: endRate,
+                rate: "End",
+              },
+              {
+                value: endRate - starRate,
+                rate: "Fluc",
+              },
+            ],
+            RateVector: rateChange,
+            DateRange: [date.startDate, date.endDate, d.toString()],
           };
         });
-
         dispatch({ type: "FLUCTUATION_DATA", payload: data });
       } else {
+        let indexofCurrency = 4;
         let start = "2024-03-02";
         let end = "2024-03-04";
-        const starRate = histry[start][2].value;
-        const endRate = histry[end][2].value;
+        const starRate = histry[start][indexofCurrency].value;
+        const endRate = histry[end][indexofCurrency].value;
         let rateChange = fluctuationVector(endRate, starRate);
-
+        // const data = {
+        //   starRate,
+        //   endRate,
+        //   rateChange,
+        // };
         const data = {
-          starRate,
-          endRate,
-          rateChange,
+          graphvalues: [
+            {
+              value: starRate,
+              rate: "Start",
+            },
+            {
+              value: endRate,
+              rate: "End",
+            },
+            {
+              value: starRate - endRate,
+              rate: "Fluc",
+            },
+          ],
+          RateVector: rateChange,
+          DateRange: [start, end, "30 May, 4:53 am UTC"],
         };
         dispatch({ type: "FLUCTUATION_DATA", payload: data });
       }
