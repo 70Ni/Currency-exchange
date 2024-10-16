@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useRef } from "react";
 
 import { BarChart, BarPlot } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
@@ -8,6 +8,7 @@ import DatePicker from "../../Components/DatePicker/DatePicker";
 import fluctuationVector from "../../Functions/Fluctuation";
 import { useSelector } from "react-redux";
 import { colors } from "@mui/material";
+import { useComponentVisible } from "../../Functions/useComponentVisible";
 
 // const dataset = [
 //   {
@@ -27,6 +28,13 @@ import { colors } from "@mui/material";
 
 const color = "#d9d9d9";
 
+let condition = false;
+if (condition) {
+  console.log("Hello");
+} else if (!condition) {
+  console.log("user module");
+}
+
 function Flactuation({ base }) {
   // console.log(base);
   const [date, setDate] = useState({
@@ -41,7 +49,7 @@ function Flactuation({ base }) {
   const barGraph = useSelector((state) => state?.fluctuation);
   let bar = barGraph;
   console.log(bar, "=====");
-  const dates = useSelector((state) => state?.fluctuation[0]?.DateRange);
+  const dates = useSelector((state) => state?.fluctuation?.DateRange);
 
   const fistLink =
     "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@" +
@@ -124,38 +132,103 @@ function Flactuation({ base }) {
     },
   };
   const monthDay = (dateIndex) => {
-    console.log(dateIndex.split("-").splice(1, 2).join("-"));
-    let c = dateIndex.split("-").splice(1, 2);
+    console.log(dateIndex?.split("-").splice(1, 2).join("-"));
+    let c = dateIndex?.split("-").splice(1, 2);
     let d = ([c[0], c[1]] = [c[1], c[0]]);
     let e = d.join("-");
     console.log(e);
     return e;
   };
 
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(true);
+  const [visible, setvisible] = useState(false);
+
+  const useOutsideClick = (callback) => {
+    const ref = useRef(null);
+
+    useEffect(() => {
+      const handleClick = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+          callback();
+        }
+      };
+
+      document.addEventListener("mousedown", handleClick);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClick);
+      };
+    }, [callback]);
+
+    return ref;
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useOutsideClick(() => setIsOpen(false));
+
+  const ChangeVisible = (action) => {
+    setvisible(action);
+  };
+
+  const barColors = ["#FDCF6E", "#DC9A0E", "#FDCF6E"];
   return (
     <div className="current-wrapper Flactuation-wrapper">
       <div className="Header-section">
         <div className="cur-left">
           <div className="Header">Fluctuation</div>
+          {/* {dates ? (
+            <div className="para">
+              {monthDay(dates[0])} - {monthDay(dates[1])}
+            </div>
+          ) : null} */}
+        </div>
+        <div className="cur-right">
+          <div
+            className="Button"
+            style={{ display: "block" }}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "Close Range" : "Select Range"}
+          </div>
+        </div>
+      </div>
+      <div className="sub-section">
+        <div className="para">
+          Information about the currency’s fluctuation on a day-to-day basis
+        </div>
+      </div>
+      <div className="date-picker-in">
+        <div className="datepicker" ref={dropdownRef}>
+          {isOpen && (
+            <DatePicker
+              setIsOpen={setIsOpen}
+              ChangeVisible={ChangeVisible}
+
+              // useOutsideClick={useOutsideClick}
+            />
+          )}
+        </div>
+      </div>
+      <div className="fluc-data-line">
+        <div className="fluc-value">
+          <div className="fluc-wraper">
+            <div className="para">
+              Base Value <span className="tag">EUR</span>{" "}
+            </div>
+          </div>
+        </div>
+        <div className="fluc-wraper">
           {dates ? (
             <div className="para">
               {monthDay(dates[0])} - {monthDay(dates[1])}
             </div>
           ) : null}
         </div>
-        <div className="cur-right">
-          <div className="Button">Select range</div>
-        </div>
-      </div>
-      {/* <div className="date-picker-in">{<DatePicker />}</div> */}
-      <div className="sub-section">
-        <div className="para">
-          Information about the currency’s fluctuation on a day-to-day basis
-        </div>
       </div>
       <div className="graph-wrapper fluctuation-grp-wrapper">
         <div className="chart-align fluc-chart">
-          {bar ? (
+          {bar.graphvalues ? (
             <BarChart
               dataset={bar?.graphvalues}
               borderRadius={4}
@@ -178,10 +251,19 @@ function Flactuation({ base }) {
                   tickLabelPlacement: "middle",
                   //underline value here ........s
                   //   tickPlacement,
+
+                  colorMap: {
+                    type: "ordinal",
+                    // values: value,
+
+                    colors: barColors,
+                  },
                 },
               ]}
               {...chartSetting}
             />
+          ) : bar.message ? (
+            <div className="para">"No internet connection"</div>
           ) : (
             "Nothing found"
           )}
@@ -189,41 +271,63 @@ function Flactuation({ base }) {
         <div className="fluc-data-wrapper">
           <div className="fluc-data-line">
             <div className="fluc-value">
-              <div className="para">Base Value :</div>
-              <div className="tag">EUR</div>
-            </div>
-          </div>
-          <div className="fluc-data-line">
-            <div className="fluc-value">
-              <div className="indicator"></div>
+              <div
+                className="indicator"
+                style={{ backgroundColor: "#FDCF6E" }}
+              ></div>
               <div className="para">Start Rate</div>
             </div>
-            <div className="fluc-rate sub-Header">
-              {bar?.graphvalues[0]?.value?.toFixed(3)}
-            </div>
+            {bar.graphvalues ? (
+              <div className="fluc-rate sub-Header">
+                {bar?.graphvalues[0]?.value?.toFixed(3)}
+              </div>
+            ) : null}
           </div>
           <div className="fluc-data-line">
             <div className="fluc-value">
-              <div className="indicator"></div>
+              <div
+                className="indicator"
+                style={{ backgroundColor: "#DC9A0E" }}
+              ></div>
               <div className="para">End Rate</div>
             </div>
-            <div className="fluc-rate sub-Header">
-              {bar?.graphvalues[1]?.value?.toFixed(3)}
-            </div>
+            {bar.graphvalues ? (
+              <div className="fluc-rate sub-Header">
+                {bar?.graphvalues[1]?.value?.toFixed(3)}
+              </div>
+            ) : null}
           </div>
           <div className="fluc-final-value">
             <div className="fluc-data-line">
               <div className="fluc-value">
-                <div className="indicator"></div>
+                {/* <div className="indicator"></div> */}
                 <div className="para">Rate change</div>
               </div>
               {bar ? (
-                <div className="tag spacer8">{bar?.RateVector}</div>
+                <div
+                  className="tag spacer8 lowHigh"
+                  style={
+                    bar?.RateVector == "Low"
+                      ? { backgroundColor: "#EFBDB2" }
+                      : { backgroundColor: "#A9D395" }
+                  }
+                >
+                  {bar?.RateVector}
+                </div>
               ) : null}
             </div>
-            <div className="fluc-rate Header final-fluc-value">
-              {bar?.graphvalues[2]?.value.toFixed(5)}
-            </div>
+            {bar.graphvalues ? (
+              <div
+                className="fluc-rate final-fluc-value"
+                style={
+                  bar?.RateVector == "Low"
+                    ? { color: "#4C9C0D" }
+                    : { color: "#329B00" }
+                }
+              >
+                {bar?.graphvalues[2]?.value.toFixed(5)}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

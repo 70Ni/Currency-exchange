@@ -27,25 +27,25 @@ export default function HistoricData() {
   let mo;
   let indexofCurrency;
 
-  for (let i = 2; i <= 31; i++) {
-    let typeOfCurrency;
-    // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
-    mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
-    let arr = [];
-    for (let j = 0; j < 14; j++) {
-      let valueToFind = "KWD";
-      // console.log(mo[j].currency == valueToFind);
-      arr.push(mo[j].currency == valueToFind);
-      indexofCurrency = arr.indexOf(true);
-    }
-    // console.log(mo[3].value,"CAD");
-    ud.push(mo[indexofCurrency].value.toFixed(2));
-    xd.push(i);
+  // for (let i = 2; i <= 31; i++) {
+  //   let typeOfCurrency;
+  //   // let mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
+  //   mo = data[`2024-03-${i.toString().padStart(2, "0")}`];
+  //   let arr = [];
+  //   for (let j = 0; j < 14; j++) {
+  //     let valueToFind = "KWD";
+  //     // console.log(mo[j].currency == valueToFind);
+  //     arr.push(mo[j].currency == valueToFind);
+  //     indexofCurrency = arr.indexOf(true);
+  //   }
+  //   // console.log(mo[3].value,"CAD");
+  //   ud.push(mo[indexofCurrency].value.toFixed(2));
+  //   xd.push(i);
 
-    // console.log(data[`2024-03-02`][i].value, "data");
-    // let month = data[`2024-03-${i.toString().padStart(2, "0")}`][1];
-    // let month = data[`2024-03-05`][i].currency;
-  }
+  //   // console.log(data[`2024-03-02`][i].value, "data");
+  //   // let month = data[`2024-03-${i.toString().padStart(2, "0")}`][1];
+  //   // let month = data[`2024-03-05`][i].currency;
+  // }
 
   // historic.map((x, i) => {
   //   let j = i + 7;
@@ -58,17 +58,18 @@ export default function HistoricData() {
   //   setUdata(ud);
   //   setxLabels(xd);
   // }, [setUdata]);
+  const state = useSelector((state) => state?.online);
 
   const timeline = useSelector((lineData) => lineData.historic.filter);
-  console.log(timeline);
-  let uData = timeline.ud;
-  let xLabels = timeline.xd;
+  // const hist = useSelector((lineData) => lineData);
+  let uData = timeline?.ud;
+  let xLabels = timeline?.xd;
   return (
     <div className="chart-align">
       <div className="chart-block">
         <div className="sub-section">
-          <div className="sub-Header">United State Dollar</div>
-          <div className="sub-Header">$</div>
+          {/* <div className="sub-Header">{state?s.defcurrency.toUpperCase()}</div> */}
+          <div className="sub-Header"> Historic Data</div>
         </div>
         {uData ? (
           <LineChart
@@ -91,10 +92,17 @@ export default function HistoricData() {
                 // label: "uv",
                 area: true,
                 showMark: false,
-                color,
+                color: "#FFA490",
               },
             ]}
-            xAxis={[{ scaleType: "point", data: xLabels }]}
+            xAxis={[
+              {
+                scaleType: "point",
+                data: xLabels,
+                tickLabelPlacement: "middle",
+                tickPlacement: "middle",
+              },
+            ]}
             sx={{
               [`& .${lineElementClasses.root}`]: {
                 display: "none",

@@ -1,34 +1,38 @@
 import React from "react";
 import { BarChart } from "@mui/x-charts";
-import { useSelector } from "react-redux";
+import { baseCurrecny } from "../../actions/datafetch";
+import { useDispatch, useSelector } from "react-redux";
 
-const onItemClick = (
-  event, // The mouse event.
-  params // An object that identifies the clicked elements.
-) => {
-  return console.log(params);
-};
+// const online = useDispatch((st) => st?.online.online);
 
-const chartSetting = {
-  yAxis: [
-    {
-      label: `rate in ${dataset?.currency}`,
-    },
-  ],
-  series: [{ dataKey: "value", valueFormatter, colour }],
-  height: 242,
-  sx: {
-    [`& .${axisClasses.directionY} .${axisClasses.label}`]: {
-      transform: "translateX(-10px)",
-    },
-  },
-};
-let dataset = useSelector((state) => state.fetchdata.data);
+function CurrencyBar({ obj, chartSetting }) {
+  const dispatch = useDispatch();
+  const onItemClick = (
+    event, // The mouse event.
+    params // An object that identifies the clicked elements.
+  ) => {
+    // return console.log(params);
+    console.log(params);
+    return dispatch(baseCurrecny(params.axisValue, online));
+  };
+  let online = useSelector((state) => state.online.online);
+  let colorObj = [];
+  const colorBar = () => {
+    let activeColor = "#E16449";
+    let pasColor = "#FFA490";
+    for (let i = 0; i < obj.length; i++) {
+      let indexofcurr = console.log(obj.findIndex((x) => x.curre));
+      colorObj.push(activeColor);
+    }
+  };
 
-function CurrencyBar() {
+  console.log(colorObj);
+
+  colorBar();
+
   return (
     <BarChart
-      dataset={dataset}
+      dataset={obj}
       borderRadius={4}
       grid={{ vertical: false }}
       leftAxis={null}
@@ -40,6 +44,7 @@ function CurrencyBar() {
       // }}
       onAxisClick={onItemClick}
       // ...
+      series={[{ color: "#E16449" }]}
       height={242}
       margin={{
         left: 0,
@@ -51,6 +56,11 @@ function CurrencyBar() {
         {
           scaleType: "band",
           dataKey: "currency",
+          // colorMap: {
+          //   type: "ordinal",
+          //   // values: value,
+          //   colors: "#E16449",
+          // },
         },
       ]}
       {...chartSetting}

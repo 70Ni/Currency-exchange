@@ -1,0 +1,1 @@
+remove the local  = indexofCurrency from else fluctuationData action

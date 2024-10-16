@@ -47,11 +47,14 @@ export const fetchitemData =
         const data = await Promise.all(
           urls.map((url) => fetch(url).then((res) => res.json()))
         ).then(async (respo) => {
+          //finding index of currency
           for (let i = 0; i <= currencyList.length; i++) {
             indexofCurrency = await Object.keys(respo[0][base]).indexOf(
               currencyList[i]
             );
             // console.log(currencyList.length, "MEMEBERS");
+
+            // storing name and value based on index
             let value = await Object.entries(respo[0][base]);
             dap = await value[indexofCurrency];
             if (dap) {
@@ -83,7 +86,7 @@ export const fetchitemData =
       } else {
         const data = await { online, eur };
         const work = () => {
-          for (let i = 0; i <= currencyList.length; i++) {
+          for (let i = 0; i <= currencyList?.length; i++) {
             indexofCurrency = Object.keys(eur.eur).indexOf(currencyList[i]);
             // console.log(currencyList.length, "MEMEBERS");
             let value = Object.entries(eur.eur);
@@ -110,9 +113,9 @@ export const fetchitemData =
             // check the default currency chagnes
             console.log(defaultCurrency);
             for (let j = 0; j < 14; j++) {
-              let valueToFind = defaultCurrency;
+              let valueToFind = defaultCurrency.toUpperCase();
               // console.log(mo[j].currency == valueToFind);
-              arr.push(mo[j].currency == valueToFind.toUpperCase());
+              arr.push(mo[j].currency == valueToFind);
               curPosition = arr.indexOf(true);
             }
             // console.log(mo[3].value,"CAD");
@@ -220,15 +223,15 @@ export const fluctuationData =
         });
         dispatch({ type: "FLUCTUATION_DATA", payload: data });
       } else {
-        let currencyPosition = currencyList.indexOf(defaultCurrency);
-        let indexofCurrency = currencyPosition;
+        // let currencyPosition = currencyList?.indexOf(defaultCurrency);
+        // let indexofCurrency = currencyPosition;
 
-        console.log(
-          currencyList.indexOf(defaultCurrency),
-          defaultCurrency,
-          currencyList,
-          "indexofCurency in the array"
-        );
+        // console.log(
+        //   currencyList.indexOf(defaultCurrency),
+        //   defaultCurrency,
+        //   currencyList,
+        //   "indexofCurency in the array"
+        // );
         let start = "2024-03-02";
         let end = "2024-03-04";
         let itemToFind = defaultCurrency.toUpperCase();
@@ -271,15 +274,24 @@ export const fluctuationData =
         dispatch({ type: "FLUCTUATION_DATA", payload: data });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      dispatch({ type: "FLUCTUATION_DATA_FAIL", payload: error });
     }
   };
 
-export const baseCurrecny = (defaultCurrency) => async (dispatch) => {
+export const baseCurrecny = (defaultCurrency, online) => async (dispatch) => {
   try {
-    dispatch({ type: "BASE_CURRENCY", payload: defaultCurrency });
+    // await dispatch({
+    //   type: "SET_ONLINE_STATUS",
+    //   payload: { defaultCurrency, online },
+    // });
+    await dispatch({
+      type: "BASE_CURRENCY",
+      payload: { defaultCurrency, online },
+    });
   } catch (error) {
     console.log(error);
+    dispatch({ type: "ERROR_ONLINE", payload: error });
   }
 };
 // online to be global

@@ -34,17 +34,23 @@ let date;
 let finalObje = {};
 let dataOb;
 let firstDate;
+let fetchurl;
 let finalarray = [];
+let dateMonth;
 const monthFetch = () => {
   let indexofCurrency;
-  for (let index = 14; index <= 24; index++) {
-    let fetchl = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-03-${index}/v1/currencies/eur.json`;
+  for (let index = 1; index <= 31; index++) {
+    if (index < 10) {
+      dateMonth = `2024-04`;
+      index = index.toString().padStart(2, "0");
+      fetchurl = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateMonth}-${index}/v1/currencies/eur.json`;
+    }
 
     // console.log(
     //   `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-03-${index}/v1/currencies/eur.json`
     // );
     async function fetchData() {
-      const response = await fetch(fetchl);
+      const response = await fetch(fetchurl);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -61,9 +67,9 @@ const monthFetch = () => {
         if (dap) {
           name = await dap[0];
           valu = await dap[1];
-          firstDate = `2024-03-${index}`;
+          firstDate = `${dateMonth}-${index}`;
           // date = await dataOb[0][1];
-          obj.push({ value: valu, currency: name.toUpperCase() });
+          obj.push({ value: valu, currency: name });
         } //if loop for dap
       } //for loooooooooooop currency
       finalObje[firstDate] = obj;
@@ -74,14 +80,14 @@ const monthFetch = () => {
       // console.log(index, "index", currencyList.length, "cuurency");
     }
 
-    fetchData();
+    // fetchData();
     // fetchData()
     //   .then((data) => console.log(data))
     //   .catch((error) => console.error("Error:", error));
   } ///for loop of date
 };
 
-console.log(finalObje);
+// console.log(finalObje);
 // finalObje[firstDate].push(obj);
 
 // if (firstDate === dataOb[0][1]) {

@@ -1,0 +1,25 @@
+.det-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0px;
+}
+.value-wrper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 24px;
+  border-top: 1px solid #ddd;
+  padding-top: 32px;
+}
+.valuecalc {
+  margin: 8px 0px;
+}
+.currencyname {
+  font-size: 14px;
+  font-weight: 500;
+}
+.currnt-value {
+  font-size: 18px;
+  font-weight: 800;
+}

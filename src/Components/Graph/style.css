@@ -1,12 +1,11 @@
 .Header-section {
   display: flex;
-  background-color: #f5f5f5;
   justify-content: space-between;
   width: 100%;
 }
 .current-wrapper {
   border-radius: 12px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   padding: 40px;
   justify-content: space-between;
   margin: 20px;
@@ -26,19 +25,27 @@
   justify-content: space-between;
 }
 .fluc-value {
-  margin: 0px 20px;
+  /* margin: 0px 20px; */
+}
+.fluc-base {
+  margin-bottom: 24px;
 }
 .fluc-data-line {
   margin: 8px 0px;
 }
 .final-fluc-value {
   float: right;
+  margin-top: 14px;
+  font-family: "Inter", Courier, monospace;
+  font-size: 24px;
+  font-weight: 600;
 }
 .indicator {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 20px;
   margin-right: 8px;
+  /* border: 1px solid red; */
   background-color: rebeccapurple;
 }
 .fluc-data-wrapper {
@@ -61,9 +68,11 @@
   font-weight: 400;
   opacity: 0.5;
 }
-.dashboard-wrapper {
-  display: flex;
+.paraBold {
+  opacity: 1;
+  font-weight: 500;
 }
+
 .cur-left {
   margin-bottom: 24px;
   max-width: 355px;
@@ -86,14 +95,37 @@
   padding: 8px 20px;
   border: 8px;
   opacity: 1;
-  font-weight: 600;
-  background-color: #d9d9d9;
-  border: 1px solid #b6b6b6;
+  font-weight: 500;
+  background-color: #2a2a2a;
+  border: 1px solid #555555;
+  color: #e4e4e4;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
-  margin-left: 20px;
+  margin-left: 8px;
+  height: fit-content;
+}
+
+.Button-green {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4C9C0D;
+  color: #4C9C0D;
+  background-color: #70c78715;
+  transition-duration: 700;
+}
+.Button-yellow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2a2a2a;
+  color: #2a2a2a;
+  background-color: white;
+}
+.space-right2 {
+  margin-right: 8px;
 }
 .graph-wrapper {
   display: flex;
@@ -105,7 +137,7 @@
   align-items: baseline;
 }
 .addIcon {
-  padding: 20px;
+  padding: 20px 12px;
   cursor: pointer;
   z-index: 5;
 }
@@ -122,8 +154,25 @@
 .tag {
   padding: 4px 18px;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 13px;
+  font-weight: 400;
   background-color: #e4e4e4;
   width: fit-content;
+  margin-left: 8px;
+  transition: 0.2s ease-in;
+}
+.lowHigh {
+  width: 30px;
+  text-align: center;
+}
+.tag-border {
+  border: 1px solid #c6c6c6;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  color: #555555;
+}
+.basetag {
+  width: 84px;
+  background-color: #feecc5;
+  color: #996801;
 }

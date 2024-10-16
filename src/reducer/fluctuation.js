@@ -4,7 +4,9 @@ export default (state = initialState, action) => {
     case "FLUCTUATION_DATA":
       // console.log(action.payload);
       return action.payload;
-      break;
+    case "FLUCTUATION_DATA_FAIL":
+      // console.log(action.payload);
+      return { message: action.payload.message };
     default:
       return state;
   }
