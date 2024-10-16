@@ -1,4 +1,3 @@
-import { defaultClassPrefix } from "rsuite/esm/internals/utils";
 import eur from "../Components/Api/eur.json";
 import histry from "../Components/Api/Histo.json";
 import fluctuationVector from "../Functions/Fluctuation";
