@@ -1,38 +1,178 @@
 .App {
-  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.dashboard-wrapper {
+  /* display: flex; */
+  /* flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+}
+
+.introWrapper {
+  /* max-width: 800px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  /* margin-left: 80px; */
+}
+
+.Started-Button {
+  padding: 10px 24px;
+  background-color: #2a2a2a;
   color: white;
+  border-radius: 8px;
+  width: fit-content;
+  margin-top: 30px;
+  cursor: pointer;
+}
+.heading {
+  font-size: 80px;
+  margin-bottom: 30px;
+}
+.intro-image {
+  width: 280px;
+}
+.introtext-section {
+  max-width: 420px;
+  margin: 0px 20px;
+  /* margin-left: 120px; */
+}
+.current-date {
+  opacity: 0.5;
+}
+.dashboard-graph-wrapper {
+  display: flex;
+  width: 100%;
+}
+.fluctuation-grp-wrapper {
+  align-items: flex-end;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 962px) {
+  .graph-wrapper {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .chart-align {
+    max-width: none;
+  }
+  .chart-block {
+    margin-left: 0px;
+    margin-top: 40px;
+  }
+  .fluc-data-wrapper {
+    margin-top: 40px;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .date-range-container {
+    flex-wrap: wrap;
+  }
+  .date-picker-contain {
+    top: -40px;
+  }
+}
+
+@media only screen and (max-width: 752px) {
+  .dashboard-graph-wrapper {
+    flex-wrap: wrap;
+  }
+  .current-wrapper {
+    max-width: none;
+  }
+  .fluctuation-grp-wrapper {
+    display: flex;
+  }
+  .fluc-chart {
+    max-width: 120px;
+  }
+  .date-picker-contain {
+    padding: 14px 20px;
+  }
+  .introWrapper {
+    flex-direction: column;
+  }
+  .introtext-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .button-wrpper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 492px) {
+  .heading {
+    font-size: 40px;
+  }
+  .intro-image {
+    width: 200px;
+  }
+  .status-wrapper {
+    flex-wrap: wrap;
+  }
+  .fetch-status {
+    margin: 14px 0px;
+    margin-right: 14px;
+  }
+  .date-range-wrapper {
+    flex-wrap: wrap;
+  }
+  .current-date {
+    margin-bottom: 14px;
+    opacity: 0.5;
+  }
+  .fluctuation-grp-wrapper {
+    justify-content: space-between;
+  }
+
+}
+
+@media only screen and (max-width: 374px) {
+  .current-wrapper {
+    padding: 32px 24px;
+  }
+  .Header-section {
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .Button {
+    margin-left: 0px;
+    text-align: center;
+  }
+  .cur-right {
+    width: 100%;
+  }
+  .date-range-container {
+    flex-wrap: wrap;
+  }
+  .status-range-selector {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .st-date-buttons {
+    margin: 8px 0px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .margin-right {
+    margin-right: none;
+  }
+  .addIcon {
+    padding: 20px 12px;
+  }
+  .det-wrapper {
+    flex-wrap: wrap;
   }
 }
