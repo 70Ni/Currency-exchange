@@ -15,7 +15,6 @@ export default (state = initialState, action) => {
         defcurrency: action.payload.defaultCurrency,
         online: action.payload.online,
       };
-      break;
     // case "SET_ONLINE_STATUS":
     //   console.log(action.payload.online, "from Redux state ================");
     //   return {
